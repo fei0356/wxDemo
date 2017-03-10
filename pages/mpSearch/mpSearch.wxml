@@ -1,0 +1,31 @@
+
+<!--pages/mpSearch/mpSearch.wxml-->
+<form bindsubmit="formSubmit" bindreset="formReset" class="{{isFormActive ? 'formS' : ''}}">
+
+    
+    <block wx:if="{{mp_list.length}}">
+      <input name="keyword" id="keyword" placeholder="输入您要搜索的公众号" bindchange="bindChange" class="inputS"/>
+      <button formType="submit" class="search">
+        <icon type="search" formType="submit"></icon>
+      </button>
+    </block>
+    <block wx:if="{{isShow}}">
+      <view class="section__title">公众号搜索</view>
+    <input name="keyword" id="keyword" placeholder="输入您要搜索的公众号" bindchange="bindChange" />
+    <button formType="submit">搜索</button>
+    </block>
+</form>
+<view class="list-box">
+  <block wx:if="{{mp_list.length}}">
+    <view wx:for="{{mp_list}}" class="list" bindtap="bindViewTap" data-wxid="{{item.mp_weixin_id}}">
+      <image class="userinfo-avatar" src="{{item.mp_avatar}}"></image>
+      <view class="text-box">
+        <text class="user-motto">{{item.mp_name}}</text>
+        <text class="user-motto">{{item.mp_weixin_id}}</text>
+        <text class="user-motto">{{item.mp_recommend}}</text>
+      </view>
+    </view>
+    <button class="btn-more" wx:if="{{nextpage}}" bindtap="formSubmit">查看更多</button>
+  </block>
+  <text wx:if="{{isdata}}" class="nodata">暂无数据</text>
+</view>

@@ -1,0 +1,111 @@
+<view class="block userinfo">
+    <image class="userinfo-avatar" src="{{mp_info.mp_avatar}}"></image>
+    <view class="info-box">
+        <text class="l-font">{{mp_info.mp_name}}</text>
+        <text class="mp_weixin_id">微信号：{{mp_info.mp_weixin_id}}</text>
+        <text>粉丝书：{{mp_info.mp_fans}}</text>
+    </view>
+</view>
+
+<view class="block mp_recommend">
+    <text class="l-font mp_recommend_title">账号简介</text>
+    <text class="mp_recommend_content">{{mp_info.mp_recommend}}</text>
+</view>
+
+<view class="block mp_info">
+    <text class="title">公众号画像</text>
+    <text class="l-font">粉丝性别比</text>
+    <view class="sex-box">
+        <view style="width:{{width}}" class="man"></view>
+    </view>
+    <view class="sex-number">
+        <text>男：{{mp_info.mp_sex_percent[0].percent||'暂无数据'}}</text>
+        <text>女：{{mp_info.mp_sex_percent[1].percent||'暂无数据'}}</text>
+    </view>
+
+    <view class="map">
+        <text class="l-font">粉丝TOP3地域分析</text>
+        <view wx:if="{{province.length}}" class="province_con" wx:for="{{3}}">
+            <text class="province_title">{{province[index].province}}</text>
+            <text class="province_title">{{province[index].percent}}</text> 
+            <view class="province_box">
+                <view class="province" style="width:{{province[index].percent}}"></view>
+            </view>
+        </view>
+        <text wx:if="{{!province.length}}"> 
+            暂无数据
+        </text>
+    </view>
+
+    <!-- 近期公众号平均数据 -->
+    <view class="avg">
+        <text class="l-font topT">近期公众号平均数据</text>
+        <view class="avgBtnBox">
+            <text class="avg-btn" style="border:{{border1}}" data-day="7" bindtap="avgDayTap">7天</text>
+            <text class="avg-btn" style="border:{{border2}}" data-day="15"   bindtap="avgDayTap">15天</text>
+        </view>
+        <view class="avgNumBox">
+            <view class="avgSon">
+                <text class="mb">文章发布数</text>
+                <text>{{act_info.publish_num||"暂无数据"}}</text>
+            </view>
+            <view class="avgSon">
+                <text class="mb">头条阅读数</text>
+                <text>{{act_info.read_num_avg_line1||"暂无数据"}}</text>
+            </view>
+            <view class="avgSon">
+                <text class="mb">2条阅读数</text>
+                <text>{{act_info.read_num_avg_line2||"暂无数据"}}</text>
+            </view>
+            <view class="avgSon">
+                <text class="mb">3-N条阅读数</text>
+                <text>{{act_info.read_num_avg_other||"暂无数据"}}</text>
+            </view>
+        </view>          
+    </view>
+
+    <view class="top10">
+        <text class="l-font topT">近30天top10文章</text>
+        <view class="arcBox"> 
+            <text class="arcT">标题</text>    
+            <text class="arcSon">阅读数</text>
+            <text class="arcSon">点赞数</text>
+        </view>
+        
+        <view class="arcBox">
+            <text class="arcT">金星说，嫁了必定悲剧的八种男人金星说，嫁了必定悲剧的八种男人金星说，嫁了必定悲剧的八种男人金星说，嫁了必定悲剧的八种男人 ！</text>
+            <text class="arcSon">13832</text>
+            <text class="arcSon">13832</text>
+        </view>
+        <view class="arcBox">
+            <text class="arcT">金星说，嫁了必定悲剧的八种男人金星说，嫁了必定悲剧的八种男人金星说，嫁了必定悲剧的八种男人金星说，嫁了必定悲剧的八种男人 ！</text>
+            <text class="arcSon">13832</text>
+            <text class="arcSon">13832</text>
+        </view>
+    </view>
+
+    <!-- 近期公众号平均数据视图 -->
+    <view class="line">
+        <text class="l-font">近期公众号平均数据视图</text>
+        <view class="avgBtnBox">
+            <text class="avg-btn" style="border:{{border3}}" data-day="7" bindtap="lineDayTap">7天</text>
+            <text class="avg-btn" style="border:{{border4}}" data-day="15"   bindtap="lineDayTap">15天</text>
+        </view>
+
+        <view class="lineBtnBox">
+            <text class="line-btn" style="border-bottom:{{bb1}}" bindtap="typeTap" data-type="0">文章发布数</text>
+            <text class="line-btn" style="border-bottom:{{bb2}}" bindtap="typeTap" data-type="1">头条阅读数</text>
+            <text class="line-btn" style="border-bottom:{{bb3}}" bindtap="typeTap" data-type="2">2条阅读数</text>
+            <text class="line-btn" style="border-bottom:{{bb4}}" bindtap="typeTap" data-type="3">3-N条阅读数</text>
+        </view>
+        <canvas style="width: 100%;height:250px;" canvas-id="area"></canvas>
+    </view>
+</view>
+
+<view class="block footer">
+    <image class="mp_qrcode" src="{{mp_info.mp_qrcode}}"></image>
+    <text class="tip">扫一扫关注</text>
+    <text>以上数据均来源于易赞，非实时更新，仅供参考</text>
+</view>
+
+
